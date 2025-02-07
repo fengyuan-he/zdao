@@ -60,6 +60,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.2.0
         version: 3.2.0
+      '@netlify/plugin-nextjs':
+        specifier: ^5.9.4
+        version: 5.9.4
       '@types/node':
         specifier: ^20.17.17
         version: 20.17.17
@@ -488,6 +491,10 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  '@netlify/plugin-nextjs@5.9.4':
+    resolution: {integrity: sha512-Q9qyhGUxFuM3kuWmoaj4yHPUfHhOsZmwdsQv4kIXkBWVu8FOe0RFHRP0A0EXciSVFGwq+XAo3H5jEtVSANAOWw==}
+    engines: {node: '>=18.0.0'}
 
   '@next/env@15.1.6':
     resolution: {integrity: sha512-d9AFQVPEYNr+aqokIiPLNK/MTyt3DWa/dpKveiAaVccUadFbhFEvY6FXYX2LJO2Hv7PHnLBu2oWwB4uBuHjr/w==}
@@ -2634,6 +2641,8 @@ snapshots:
       react-is: 19.0.0
     optionalDependencies:
       '@types/react': 19.0.8
+
+  '@netlify/plugin-nextjs@5.9.4': {}
 
   '@next/env@15.1.6': {}
 
