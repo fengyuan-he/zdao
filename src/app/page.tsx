@@ -41,8 +41,6 @@ export default function Home() {
     const [text, setText] = useLocalStorage('text')
     const {push} = useRouter()
     const [cnt, setCnt] = useState(1)
-    const pages = []
-    for (let i = 0; i < cnt; i++) pages.push(<Page index={i} key={i}/>)
     return (
         <>
             <AppBar>
@@ -79,7 +77,7 @@ export default function Home() {
                             }
                         }}
                     />
-                    {pages}
+                    {new Array(cnt).map((_, index) => <Page index={index} key={index}/>)}
                     <Button onClick={() => setCnt(cnt + 1)}>
                         加载更多
                     </Button>
