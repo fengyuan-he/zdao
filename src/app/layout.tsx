@@ -1,10 +1,11 @@
 import type {Metadata} from "next";
 import {ReactNode} from "react";
 import Providers from "@/app/Providers";
+import {AppRouterCacheProvider} from "@mui/material-nextjs/v13-appRouter";
 
 export const metadata: Metadata = {
-    title: "Z岛",
-    description: "一个没有用户系统的真匿名论坛",
+    title: process.env.NEXT_PUBLIC_TITLE,
+    description: process.env.NEXT_PUBLIC_DESCRIPTION
 }
 
 export default function RootLayout({children}: {
@@ -12,10 +13,12 @@ export default function RootLayout({children}: {
 }) {
     return (
         <html lang="zh-CN">
-        <body suppressHydrationWarning>
-        <Providers>
-            {children}
-        </Providers>
+        <body>
+        <AppRouterCacheProvider>
+            <Providers>
+                {children}
+            </Providers>
+        </AppRouterCacheProvider>
         </body>
         </html>
     )

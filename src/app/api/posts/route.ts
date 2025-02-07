@@ -1,6 +1,6 @@
 import api from "@/app/api";
 import prisma from "@/app/api/prisma";
-import review from "@/app/review";
+import review from "@/review";
 import postText from "@/schema/postText";
 import page from "@/schema/page";
 
