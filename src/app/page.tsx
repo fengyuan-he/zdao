@@ -77,7 +77,7 @@ export default function Home() {
                             }
                         }}
                     />
-                    {new Array(cnt).map((_, index) => <Page index={index} key={index}/>)}
+                    {Array.from({length: cnt}).map((_, index) => <Page index={index} key={index}/>)}
                     <Button onClick={() => setCnt(cnt + 1)}>
                         加载更多
                     </Button>

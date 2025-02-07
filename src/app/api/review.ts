@@ -1,4 +1,4 @@
-const sensitive = fetch('https://raw.githubusercontent.com/cjh0613/strict-sensitive-word/refs/heads/master/strict-sensitive-word.txt')
+const sensitive = fetch('https://raw.githubusercontent.com/cjh0613/tencent-sensitive-words/refs/heads/main/sensitive_words_lines.txt')
     .then(res => res.text())
     .then(value => {
         const words = value.split('\n')
@@ -7,5 +7,5 @@ const sensitive = fetch('https://raw.githubusercontent.com/cjh0613/strict-sensit
     })
 
 export default async function review(text: string) {
-    return text.replace(await sensitive, '\*')
+    return text.replace(await sensitive, match => '\*'.repeat(match.length))
 }
