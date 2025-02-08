@@ -21,6 +21,9 @@ import create from "@/app/create";
 import comment from "@/schema/comment";
 import Post from "@/components/Post";
 import postWithoutId from "@/schema/postWithoutId";
+import Await from "@/components/Await";
+import review from "@/review";
+import MDX from "@/components/MDX";
 
 const list = comment.array()
 
@@ -98,6 +101,9 @@ export default function Comments({id}: {
                             }
                         }}
                     />
+                    <Await fn={() => review(text)}>
+                        {res => <MDX>{res}</MDX>}
+                    </Await>
                     {Array.from({length: cnt}).map((_, index) => <Page id={id} index={index} key={index}/>)}
                     <Button onClick={() => setCnt(cnt + 1)}>
                         加载更多

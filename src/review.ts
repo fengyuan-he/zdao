@@ -1,4 +1,4 @@
-const sensitive = fetch('https://raw.githubusercontent.com/cjh0613/tencent-sensitive-words/refs/heads/main/sensitive_words_lines.txt')
+const sensitive = fetch('https://raw.gitmirror.com/cjh0613/tencent-sensitive-words/refs/heads/main/sensitive_words_lines.txt')
     .then(res => res.text())
     .then(value => {
         const words = value.split('\n')

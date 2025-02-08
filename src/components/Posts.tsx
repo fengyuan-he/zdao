@@ -19,6 +19,9 @@ import {
 import useLocalStorage from "@/hooks/useLocalStorage";
 import {KeyboardReturn} from "@mui/icons-material";
 import create from "@/app/create";
+import Await from "@/components/Await";
+import review from "@/review";
+import MDX from "@/components/MDX";
 
 const list = post.array()
 
@@ -76,6 +79,9 @@ export default function Posts() {
                             }
                         }}
                     />
+                    <Await fn={() => review(text)}>
+                        {res => <MDX>{res}</MDX>}
+                    </Await>
                     {Array.from({length: cnt}).map((_, index) => <Page index={index} key={index}/>)}
                     <Button onClick={() => setCnt(cnt + 1)}>
                         加载更多
