@@ -15,7 +15,7 @@ export const GET = api(async request => {
     const {nextUrl: {searchParams}} = request
     return prisma.post.findMany({
         orderBy: {
-            id: 'desc'
+            updatedAt: 'desc'
         },
         skip: page.parse(searchParams.get('page')) * 10,
         take: 10,
