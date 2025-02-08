@@ -7,7 +7,7 @@ export default function useLocalStorage(key: string): [string, Dispatch<SetState
         const newValue = localStorage.getItem(key)
         if (newValue === null) return
         setValue(newValue)
-    }, [])
+    }, [key])
     useEffect(() => {
         if (typeof window === 'undefined') return
         if (value === '') localStorage.removeItem(key)
