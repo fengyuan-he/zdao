@@ -24,6 +24,7 @@ import postWithoutId from "@/schema/postWithoutId";
 import Await from "@/components/Await";
 import review from "@/review";
 import MDX from "@/components/MDX";
+import Corner from "@/components/Corner";
 
 const list = comment.array()
 
@@ -66,6 +67,7 @@ export default function Comments({id}: {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {`>${id}`}
                     </Typography>
+                    <Corner/>
                 </Toolbar>
             </AppBar>
             <Toolbar/>

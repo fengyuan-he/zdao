@@ -22,6 +22,7 @@ import create from "@/app/create";
 import Await from "@/components/Await";
 import review from "@/review";
 import MDX from "@/components/MDX";
+import Corner from "@/components/Corner";
 
 const list = post.array()
 
@@ -50,6 +51,7 @@ export default function Posts() {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         首页
                     </Typography>
+                    <Corner/>
                 </Toolbar>
             </AppBar>
             <Toolbar/>
