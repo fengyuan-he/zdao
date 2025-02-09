@@ -1,5 +1,4 @@
 import {Card, CardContent, CardHeader} from "@mui/material";
-import {useMemo} from "react";
 import MDX from "@/components/MDX";
 
 export default function Reply({id, createdAt, text}: {
@@ -7,10 +6,12 @@ export default function Reply({id, createdAt, text}: {
     createdAt: string
     text: string
 }) {
-    const time = useMemo(() => new Date(createdAt).toLocaleString(), [createdAt])
     return (
         <Card>
-            <CardHeader title={`&${id}`} subheader={time}/>
+            <CardHeader
+                title={`&${id}`}
+                subheader={`创建于 ${new Date(createdAt).toLocaleString()}`}
+            />
             <CardContent>
                 <MDX>{text}</MDX>
             </CardContent>

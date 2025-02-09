@@ -22,7 +22,14 @@ export const GET = api(async request => {
         select: {
             id: true,
             createdAt: true,
-            text: true
+            text: true,
+            updatedAt: true,
+            _count: {
+                select: {
+                    Comment: true,
+                    Reply: true
+                }
+            }
         }
     })
 })

@@ -40,7 +40,13 @@ export const GET = api(({nextUrl: {searchParams}}) => {
         select: {
             id: true,
             createdAt: true,
-            text: true
+            text: true,
+            updatedAt: true,
+            _count: {
+                select: {
+                    Reply: true
+                }
+            }
         }
     })
 })

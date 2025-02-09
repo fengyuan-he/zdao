@@ -5,5 +5,9 @@ import post from "@/schema/post";
 export default z.object({
     createdAt: z.string(),
     text: postText,
-    Post: post
+    Post: post,
+    updatedAt: z.string(),
+    _count: z.object({
+        Reply: z.number()
+    }).strict()
 }).strict()

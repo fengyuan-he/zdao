@@ -14,7 +14,20 @@ export const GET = api(async (_, value: { id: string }) => {
                 select: {
                     id: true,
                     createdAt: true,
-                    text: true
+                    text: true,
+                    updatedAt: true,
+                    _count: {
+                        select: {
+                            Comment: true,
+                            Reply: true
+                        }
+                    }
+                }
+            },
+            updatedAt: true,
+            _count: {
+                select: {
+                    Reply: true
                 }
             }
         }
