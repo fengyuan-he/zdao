@@ -1,3 +1,4 @@
 import {z} from "zod";
 
-export default z.string().max(1500)
+export const postMax = 1600
+export default z.string().max(postMax)

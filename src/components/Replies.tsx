@@ -1,7 +1,6 @@
 'use client'
 
 import Swr from "@/components/Swr";
-import Comment from "@/components/Comment";
 import {useState} from "react";
 import {
     AppBar,
@@ -18,26 +17,28 @@ import {
 import useLocalStorage from "@/hooks/useLocalStorage";
 import {Home, KeyboardReturn} from "@mui/icons-material";
 import create from "@/app/create";
-import comment from "@/schema/comment";
 import Post from "@/components/Post";
-import postWithoutId from "@/schema/postWithoutId";
+import Comment from "@/components/Comment";
 import Await from "@/components/Await";
 import review from "@/review";
 import MDX from "@/components/MDX";
 import Corner from "@/components/Corner";
-import {commentMax} from "@/schema/commentText";
+import reply from "@/schema/reply";
+import {replyMax} from "@/schema/replyText";
+import Reply from "@/components/Reply";
+import commentWithoutId from "@/schema/commentWithoutId";
 
-const list = comment.array()
+const list = reply.array()
 
 function Page({id, index}: {
     id: number
     index: number
 }) {
     return (
-        <Swr url={`/api/comments?postId=${id}&page=${index}`} value={list}>
+        <Swr url={`/api/replies?commentId=${id}&page=${index}`} value={list}>
             {data =>
                 <Stack spacing={2}>
-                    {data.map(value => <Comment key={value.id} {...value}/>)}
+                    {data.map(value => <Reply key={value.id} {...value}/>)}
                 </Stack>
             }
         </Swr>
@@ -47,12 +48,12 @@ function Page({id, index}: {
 export default function Comments({id}: {
     id: number
 }) {
-    const [text, setText] = useLocalStorage(`>${id}-text`)
+    const [text, setText] = useLocalStorage(`#${id}-text`)
     const [cnt, setCnt] = useState(1)
     return (
         <>
             <title>
-                {`>${id}|${process.env.NEXT_PUBLIC_TITLE}`}
+                {`#${id}|${process.env.NEXT_PUBLIC_TITLE}`}
             </title>
             <AppBar>
                 <Toolbar>
@@ -66,7 +67,7 @@ export default function Comments({id}: {
                         <Home/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        {`>${id}`}
+                        {`#${id}`}
                     </Typography>
                     <Corner/>
                 </Toolbar>
@@ -74,29 +75,33 @@ export default function Comments({id}: {
             <Toolbar/>
             <Container sx={{my: 3}}>
                 <Stack spacing={2} divider={<Divider/>}>
-                    <Swr url={`/api/posts/${id}`} value={postWithoutId}>
-                        {data =>
-                            <Post {...data}/>
+                    <Swr url={`/api/comments/${id}`} value={commentWithoutId}>
+                        {({Post: postData, ...data}) =>
+                            <>
+                                <Post {...postData}/>
+                                <Comment {...data}/>
+                            </>
                         }
                     </Swr>
                     <TextField
-                        label="创建评论"
+                        label="创建回复"
                         value={text}
                         onChange={e => setText(e.target.value)}
                         multiline
                         rows={4}
                         fullWidth
-                        error={text.length > commentMax}
-                        helperText={`${text.length}/${commentMax}`}
+                        error={text.length > replyMax}
+                        helperText={`${text.length}/${replyMax}`}
                         slotProps={{
                             input: {
                                 endAdornment:
                                     <InputAdornment position="end">
                                         <IconButton onClick={async () => {
-                                            location.href = `/comment/${await create(`/api/comments?postId=${id}`, {
+                                            await create(`/api/replies?commentId=${id}`, {
                                                 method: 'POST',
                                                 body: text
-                                            })}`
+                                            })
+                                            location.reload()
                                             setText('')
                                         }}>
                                             <KeyboardReturn/>

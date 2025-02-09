@@ -7,9 +7,21 @@ import commentText from "@/schema/commentText";
 
 export const POST = api(async request => {
     const {nextUrl: {searchParams}} = request
+    const comment = await prisma.comment.update({
+        where: {
+            id: id.parse(searchParams.get('commentId')),
+        },
+        data: {
+            updatedAt: new Date()
+        },
+        select: {
+            id: true,
+            postId: true,
+        }
+    })
     const post = await prisma.post.update({
         where: {
-            id: id.parse(searchParams.get('postId')),
+            id: comment.postId
         },
         data: {
             updatedAt: new Date()
@@ -18,9 +30,10 @@ export const POST = api(async request => {
             id: true
         }
     })
-    return prisma.comment.create({
+    return prisma.reply.create({
         data: {
             postId: post.id,
+            commentId: comment.id,
             text: await review(commentText.parse(await request.text()))
         },
         select: {id: true}
@@ -28,9 +41,9 @@ export const POST = api(async request => {
 })
 
 export const GET = api(({nextUrl: {searchParams}}) => {
-    return prisma.comment.findMany({
+    return prisma.reply.findMany({
         where: {
-            postId: id.parse(searchParams.get('postId')),
+            commentId: id.parse(searchParams.get('commentId')),
         },
         orderBy: {
             updatedAt: 'desc'

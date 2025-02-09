@@ -23,6 +23,7 @@ import Await from "@/components/Await";
 import review from "@/review";
 import MDX from "@/components/MDX";
 import Corner from "@/components/Corner";
+import {postMax} from "@/schema/postText";
 
 const list = post.array()
 
@@ -64,6 +65,8 @@ export default function Posts() {
                         multiline
                         rows={4}
                         fullWidth
+                        error={text.length > postMax}
+                        helperText={`${text.length}/${postMax}`}
                         slotProps={{
                             input: {
                                 endAdornment:

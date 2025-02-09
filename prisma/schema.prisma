@@ -19,11 +19,24 @@ model Post {
   updatedAt DateTime  @default(now())
   text      String
   Comment   Comment[]
+  Reply     Reply[]
 }
 
 model Comment {
   Post      Post     @relation(fields: [postId], references: [id])
   postId    Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  text      String
+  Reply     Reply[]
+}
+
+model Reply {
+  Post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  Comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId Int
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
