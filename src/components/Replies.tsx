@@ -35,7 +35,7 @@ function Page({id, index}: {
     index: number
 }) {
     return (
-        <Swr url={`/api/replies?commentId=${id}&page=${index}`} value={list}>
+        <Swr url={`/api/replies/list?commentId=${id}&page=${index}`} value={list}>
             {data =>
                 <Stack spacing={2}>
                     {data.map(value => <Reply key={value.id} {...value}/>)}

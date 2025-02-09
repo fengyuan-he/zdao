@@ -31,7 +31,7 @@ function Page({index}: {
     index: number
 }) {
     return (
-        <Swr url={`/api/posts?page=${index}`} value={list}>
+        <Swr url={`/api/posts/list?page=${index}`} value={list}>
             {data =>
                 <Stack spacing={2}>
                     {data.map(value => <Post key={value.id} {...value}/>)}

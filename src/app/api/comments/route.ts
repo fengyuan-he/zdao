@@ -2,7 +2,6 @@ import api from "@/app/api";
 import prisma from "@/app/api/prisma";
 import review from "@/review";
 import id from "@/schema/id";
-import page from "@/schema/page";
 import commentText from "@/schema/commentText";
 
 export const POST = api(async request => {
@@ -25,28 +24,4 @@ export const POST = api(async request => {
         },
         select: {id: true}
     }).then(({id}) => id)
-})
-
-export const GET = api(({nextUrl: {searchParams}}) => {
-    return prisma.comment.findMany({
-        where: {
-            postId: id.parse(searchParams.get('postId')),
-        },
-        orderBy: {
-            updatedAt: 'desc'
-        },
-        skip: page.parse(searchParams.get('page')) * 10,
-        take: 10,
-        select: {
-            id: true,
-            createdAt: true,
-            text: true,
-            updatedAt: true,
-            _count: {
-                select: {
-                    Reply: true
-                }
-            }
-        }
-    })
 })
